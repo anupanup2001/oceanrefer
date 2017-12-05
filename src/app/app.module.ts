@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { LeadComponent } from './lead/lead.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LeadComponent
   ],
   imports: [
     BrowserModule
