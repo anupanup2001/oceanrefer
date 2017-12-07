@@ -41,5 +41,10 @@ export class AppComponent {
       console.log('User logged out');
       this.ngZone.run(() => this.signed_in = false);
     });
+
+  }
+
+  selectTab(sel) {
+    console.log('Selected');
   }
 }
