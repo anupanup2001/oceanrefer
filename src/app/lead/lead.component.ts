@@ -17,6 +17,19 @@ export class LeadComponent implements OnInit {
   ngOnInit() {
   }
 
+  getMyReferrals() {
+    const auth2 = gapi.auth2.getAuthInstance();
+    
+        if (auth2.isSignedIn.get()) {
+          const profile = auth2.currentUser.get().getBasicProfile();
+          this.http.post('/api/get_my_referrals',{referer_name: profile.getEmail()}).subscribe(
+            data => {
+              console.log(data);
+            }
+          );
+        }
+  }
+
   onRefer() {
     // Check authentication
     this.alert_class = '';

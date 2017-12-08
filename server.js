@@ -45,6 +45,17 @@ router.post('/post_refer', (req, res) => {
 
 });
 
+router.post('/get_my_referrals', (req, res) => {
+  console.log(req.body);
+  console.log('Connecting to ' + url);
+  MongoClient.connect(url, function(err, db) {
+    assert.equal(null, err);
+    db.collection('referrals').find({referer: req.body.referer_name}).toArray((err, docs) => {
+      res.json(docs);
+    });
+  });
+});
+
 router.post('/validate_user', function(req, res) {
     console.log('validating user');
     console.log(req.body);
