@@ -1,3 +1,52 @@
-<p>
-  lead works!
-</p>
+<div class="my-referrals">
+  <h6>My Referrals</h6>
+</div>
+<div class="refer-friend mt-3">
+    <form>
+        <div class="form-group">
+          <label for="referral_name">Referral Name</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="referral_name"
+            name="referral_name" 
+            aria-describedby="referral_name" 
+            placeholder="Jon Snow"
+            [(ngModel)]="referral.name">
+          <!--small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
+        </div>
+        <div class="form-group">
+            <label for="referral_phone">Phone Number</label>
+            <input 
+              type="number" 
+              class="form-control" 
+              id="referral_phone" 
+              name="referral_phone" 
+              aria-describedby="referral_phone" 
+              placeholder="888888888"
+              [(ngModel)]="referral.phone">
+            <!--small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
+          </div>
+          <div class="form-group">
+              <label for="referral_email">Email address</label>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="referral_email"
+                name="referral_email"
+                aria-describedby="referral_email" 
+                placeholder="jonsnow@gmail.com"
+                [(ngModel)]="referral.email">
+              <!--small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
+          </div>
+          <button 
+            class="btn btn-outline-success" 
+            type="button"
+            (click)="onRefer()">Refer friend</button>
+            <div class="alert" [className]="alert_class" role="alert" *ngIf="alert_class">
+                {{alert_message}}
+            </div>
+      </form>
+  
+</div>
+

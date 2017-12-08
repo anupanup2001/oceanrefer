@@ -14,6 +14,12 @@ router.get('/', function(req, res) {
     res.json({message: 'Welcome to hello api'});
 });
 
+router.post('/post_refer', (req, res) => {
+  console.log('Got referral!!')
+  console.log(req.body);
+  res.json({message:'success'})
+});
+
 router.post('/validate_user', function(req, res) {
     console.log('validating user');
     console.log(req.body);
@@ -36,5 +42,5 @@ router.post('/validate_user', function(req, res) {
         });
 });
 
-app.listen(process.env.PORT || 4200);
-console.log(`Listening on port ${process.env.PORT || 4200}` );
+app.listen(process.env.PORT || 8080);
+console.log(`Listening on port ${process.env.PORT || 8080}` );
