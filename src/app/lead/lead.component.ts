@@ -12,19 +12,22 @@ export class LeadComponent implements OnInit {
   referral: Referral = new Referral();
   alert_class: String;
   alert_message: String;
+  my_referrals: any;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.getMyReferrals();
   }
 
   getMyReferrals() {
     const auth2 = gapi.auth2.getAuthInstance();
-    
+
         if (auth2.isSignedIn.get()) {
           const profile = auth2.currentUser.get().getBasicProfile();
-          this.http.post('/api/get_my_referrals',{referer_name: profile.getEmail()}).subscribe(
+          this.http.post('/api/get_my_referrals', {referer_name: profile.getEmail()}).subscribe(
             data => {
               console.log(data);
+              this.my_referrals = data;
             }
           );
         }
@@ -51,6 +54,7 @@ export class LeadComponent implements OnInit {
         this.alert_class = 'alert-success';
         this.alert_message = 'Successfully referred';
         console.log(data);
+        this.getMyReferrals();
       },
       error => {
         this.alert_class = 'alert-danger';

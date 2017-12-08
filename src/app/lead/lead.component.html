@@ -1,7 +1,5 @@
-<div class="my-referrals">
-  <h6 (click)="getMyReferrals()">My Referrals</h6>
-</div>
-<div class="refer-friend mt-3">
+
+<div class="refer-friend">
     <form>
         <div class="form-group">
           <label for="referral_name">Referral Name</label>
@@ -48,5 +46,27 @@
             </div>
       </form>
   
+</div>
+
+<div class="my-referrals mt-5" *ngIf="my_referrals">
+  <h6>My Referrals</h6>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let referal of my_referrals; let i = index" >
+        <th scope="row">{{i + 1}}</th>
+        <td>{{referal.name}}</td>
+        <td>{{referal.phone}}</td>
+        <td>{{referal.email}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
