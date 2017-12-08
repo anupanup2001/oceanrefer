@@ -1,3 +1,10 @@
+// Mongo Db move it to diff file
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
+var ObjectId = require('mongodb').ObjectID;
+var url = process.env.MONGODB_URI;
+// mongo db
+
 const express = require('express');
 var bodyParser = require('body-parser')
 var GoogleAuth = require('google-auth-library');
@@ -14,10 +21,28 @@ router.get('/', function(req, res) {
     res.json({message: 'Welcome to hello api'});
 });
 
+// Mongo db code move to separate file
+var insertDocument = function(db, data, callback) {
+  db.collection('referrals').insertOne( data, function(err, result) {
+   assert.equal(err, null);
+   console.log("Inserted referral into the referrals collection.");
+   callback();
+ });
+};
+// Mongodo code
+
 router.post('/post_refer', (req, res) => {
   console.log('Got referral!!')
   console.log(req.body);
-  res.json({message:'success'})
+  console.log('Connecting to ' + url);
+  MongoClient.connect(url, function(err, db) {
+    assert.equal(null, err);
+    insertDocument(db, req.body, function() {
+        db.close();
+        res.json({message: 'success'})
+    });
+  });
+
 });
 
 router.post('/validate_user', function(req, res) {

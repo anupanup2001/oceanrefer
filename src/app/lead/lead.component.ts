@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Referral } from './referral.model';
 import { HttpClient } from '@angular/common/http';
 
+declare var gapi: any;
 @Component({
   selector: 'app-lead',
   templateUrl: './lead.component.html',
@@ -19,6 +20,19 @@ export class LeadComponent implements OnInit {
   onRefer() {
     // Check authentication
     this.alert_class = '';
+    const auth2 = gapi.auth2.getAuthInstance();
+
+    if (auth2.isSignedIn.get()) {
+      const profile = auth2.currentUser.get().getBasicProfile();
+      console.log('ID: ' + profile.getId());
+      console.log('Full Name: ' + profile.getName());
+      console.log('Given Name: ' + profile.getGivenName());
+      console.log('Family Name: ' + profile.getFamilyName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail());
+      this.referral.referer = profile.getEmail();
+    }
+
     this.http.post('/api/post_refer', this.referral).subscribe(
       data => {
         this.alert_class = 'alert-success';
